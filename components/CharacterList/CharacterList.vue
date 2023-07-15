@@ -1,26 +1,31 @@
 <script setup lang="ts">
-
-import axios from 'axios';
+import getCharacters from '../../services/getCharacters';
 import { ref } from 'vue'
 
 const list=ref<character[]>();
-const getCharacters=async () => {
-    try {
-        const result=await axios.get("https://rickandmortyapi.com/api/character")
-        list.value=(result.data as apiResponse<character>).results;
-    } catch (err) {
-        let error=err as Error;
-        console.log("Error in getCharacters()");
-        console.log(error.message);
+const error = ref<string>("");
+
+
+onMounted(async () => {
+    const result=await getCharacters();
+    const characters = result?.results; 
+    if (characters) { 
+        console.log(characters);
+        list.value = characters
+        error.value = ""; 
+    } else { 
+        error.value = "Failed to load"
     }
-}
-onMounted(() => {
-    getCharacters()
+   
 })
 
 </script>
 
 <template>
+    <div v-show="error.trim().length > 1">
+        {{ error }}
+    </div>
+    <div class=""></div>
     <div class="flex flex-col gap-3">
         <div v-for="character in list">
             <CharacterCard :data="character" />

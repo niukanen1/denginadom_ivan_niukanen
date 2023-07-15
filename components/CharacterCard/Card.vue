@@ -6,7 +6,6 @@ const { data }=defineProps<{ data: character }>();
 
 <template>
     <div class="flex w-fit flex-col gap-1 p-3 rounded-md border-[0.1px]">
-
         <img class="max-w-[200px]" :src="data.image" />
         <div class="flex flex-col justify-between">
             <p class="text-lg">{{data.name}}</p>
@@ -15,6 +14,5 @@ const { data }=defineProps<{ data: character }>();
                 <p>{{data.gender}}</p>
             </div>
         </div>
-
     </div>
 </template>
