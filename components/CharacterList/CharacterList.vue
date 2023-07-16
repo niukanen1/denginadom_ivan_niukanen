@@ -13,9 +13,9 @@ const characterStore=useCharacterStore();
 
 const { list, filter }=storeToRefs(characterStore);
 
-const fetchCharacters=async () => {
+const fetchCharacters=async (appliedFilter: filter) => {
     try {
-        const result=await getCharacters(page.value, filter.value);
+        const result=await getCharacters(page.value, appliedFilter);
         const { info, results: characters }=result;
         if (!info.next) {
             reachedTheEnd.value=true
@@ -32,7 +32,7 @@ const fetchCharacters=async () => {
     }
 }
 onMounted(async () => {
-    await fetchCharacters()
+    await fetchCharacters(filter.value)
     window.addEventListener('scroll', handleScroll)
 })
 onUnmounted(() => {
@@ -43,7 +43,7 @@ const handleScroll=async () => {
     if (bottomOfWindow) {
         page.value+=1;
         if (!reachedTheEnd.value) {
-            await fetchCharacters()
+            await fetchCharacters(filter.value)
         }
 
     }
@@ -51,21 +51,24 @@ const handleScroll=async () => {
 
 watch(filter, async () => {
     characterStore.clearCharacters();
-    await fetchCharacters();
+    await fetchCharacters(filter.value);
 }, { deep: true })
 
 </script>
 
 <template>
-    <div class="max-w-lg mx-auto flex flex-col gap-3 px-5">
+    <div class="w-fit mx-auto flex flex-col gap-2 px-5">
         <div v-if="count">
             Results: {{count}}
         </div>
         <div v-if="error.length>=1">
             <p class="p-1">{{error}}</p>
         </div>
-        <div v-for="character in list">
-            <CharacterCard :data="character" />
+
+        <div class="flex flex-col flex-wrap w-fit gap-1">
+            <div v-for="character in list">
+                <CharacterCard :data="character" />
+            </div>
         </div>
         <div v-if="reachedTheEnd&&error.length<1">
             <p class="text-xl font-medium">Nothing more to load</p>

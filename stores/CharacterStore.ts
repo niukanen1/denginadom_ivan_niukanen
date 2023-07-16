@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 
 
-const baseFilter: filter = { 
+const initialFilter: filter = { 
     name: undefined, 
     gender: undefined, 
     status: undefined, 
@@ -10,7 +10,7 @@ const baseFilter: filter = {
 export const useCharacterStore = defineStore("characters", { 
     state: () =>( { 
         list: [] as character[],
-        filter: baseFilter
+        filter: {...initialFilter}
     }), 
     actions: { 
         addCharacters(characterList: character[]) { 
@@ -28,7 +28,7 @@ export const useCharacterStore = defineStore("characters", {
             this.filter = updatedFilterObject; 
         }, 
         clearFilter() { 
-            this.filter = baseFilter;
+            Object.assign(this.filter, initialFilter)
         }
     }, 
     getters: { 

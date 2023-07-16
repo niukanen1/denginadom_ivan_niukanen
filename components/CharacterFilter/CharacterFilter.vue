@@ -4,12 +4,7 @@ const store=useCharacterStore();
 
 
 const clearFilters=() => {
-    console.log("Clear");
-    store.updateFilter({
-        gender: undefined,
-        status: undefined,
-        name: undefined
-    })
+    store.clearFilter()
 }
 
 </script>

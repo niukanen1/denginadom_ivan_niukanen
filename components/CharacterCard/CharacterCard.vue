@@ -1,11 +1,10 @@
 
 <script setup lang="ts">
-const { data }=defineProps<{ data: character }>();
-
+const { data }=defineProps<{ data: character }>(); 
 </script>
 
 <template>
-    <div class="flex flex-row gap-2 p-3 rounded-xl border-[0.1px]">
+    <div class="flex flex-row gap-2 p-3 rounded-xl border-[0.1px] min-w-[300px]">
 
         <div class="relative">
             <img class="max-w-[200px] rounded-md" :src="data.image" />
@@ -14,7 +13,7 @@ const { data }=defineProps<{ data: character }>();
         </div>
 
 
-        <div class="flex felx-row justify-between w-full">
+        <div class="flex flex-col justify-between w-full gap-2">
             <div class="flex flex-col ">
                 <NuxtLink :to="`/character:${data.id}`">
                     <p class="text-2xl">{{data.name}}</p>
@@ -23,8 +22,9 @@ const { data }=defineProps<{ data: character }>();
                     <p>{{data.species}}</p>
                 </div>
             </div>
-            <div class="flex felx-col">
-                <p>Episodes:</p>
+            <div class="flex flex-col gap-1">
+                <!-- <p>Episodes:</p> -->
+                <CharacterCardEpisodeList :episodes-urls="data.episode" />
             </div>
         </div>
 

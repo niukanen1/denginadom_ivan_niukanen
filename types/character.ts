@@ -6,7 +6,7 @@ type character = {
 	type: string;
 	gender: gender;
 	origin: originObj;
-	location: string;
+	location: location;
 	image: string;
 	episode: string[];
 	url: string;
@@ -17,6 +17,11 @@ type originObj = {
 	name: string;
 	url: string;
 };
+
+type location = { 
+    name: string
+    url: string
+}
 type gender = "Female" | "Male" | "Genderless" | "unknown";
 type status = "Alive" | "Dead" | "unknown";
 
