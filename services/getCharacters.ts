@@ -1,11 +1,7 @@
 import axios from "axios";
 
-export default async function getCharacters(
-	page: number = 1,
-	status?: status,
-	gender?: gender,
-	name?: string
-): Promise<apiResponse<character> | undefined> {
+export default async function getCharacters(page: number = 1, filter: filter): Promise<apiResponse<character>> {
+	const { gender, status, name } = filter;
 	// optional params
 	const params: any = {
 		page: page,
@@ -16,14 +12,8 @@ export default async function getCharacters(
 	if (gender) params.gender = gender;
 	if (name) params.name = name;
 
-	try {
-		const result = await axios.get(`https://rickandmortyapi.com/api/character`, {
-			params: params,
-		});
-		return result.data as apiResponse<character>;
-	} catch (err) {
-		let error = err as Error;
-		console.log("Error in getCharacters()");
-		console.log(error.message);
-	}
+	const result = await axios.get(`https://rickandmortyapi.com/api/character`, {
+		params: params,
+	});
+	return Promise.resolve(result.data as apiResponse<character>);
 }

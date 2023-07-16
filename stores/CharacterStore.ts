@@ -35,5 +35,6 @@ export const useCharacterStore = defineStore("characters", {
         getCharacterById: (state) => {
             return (id: number) => state.list.filter(el => el.id == id)[0]; 
         }, 
-    }
+    }, 
+    persist: true
 })
