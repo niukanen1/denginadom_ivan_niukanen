@@ -21,9 +21,6 @@ export const useEpisodeStore = defineStore('episodes', {
     getters: { 
         getEpisodeById: (state) => { 
             return (id: number) => state.episodes.filter(el => el.id == id)[0]; 
-        }, 
-        getEpisodeByUrl: (state) => { 
-            return (url: string) => state.episodes.filter(el => el.url == url)[0];
         }
-    },
+    }
 })
