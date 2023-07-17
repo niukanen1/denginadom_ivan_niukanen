@@ -17,3 +17,15 @@ export default async function getCharacters(page: number = 1, filter: filter): P
 	});
 	return Promise.resolve(result.data as apiResponse<character>);
 }
+
+export async function getSingleCharacterByUrl(url: string) { 
+    const result = (await axios.get(url)).data as character; 
+
+    return Promise.resolve(result);
+} 
+
+export async function getSingleCharacterById(id: number) { 
+    const result = (await axios.get(`https://rickandmortyapi.com/api/character/${id}`)).data as character; 
+
+    return Promise.resolve(result);
+}
