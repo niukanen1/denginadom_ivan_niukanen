@@ -11,7 +11,6 @@ const currentCharacter = characterStore.getCharacterById(parseInt(id as string))
 
 <template>
     <div class="flex flex-col justify-start items-start mt-3 mx-auto w-fit p-2 rounded-lg border-[0.5px]">
-        <!-- <div class="flex flex-row"> -->
             <img class="rounded-md" :src="currentCharacter.image" />
             <div class="flex flex-col justify-start">
                 <h1 class="text-4xl font-bold">{{ currentCharacter.name }}</h1>
@@ -24,7 +23,5 @@ const currentCharacter = characterStore.getCharacterById(parseInt(id as string))
                     <p>{{ currentCharacter.location.name }}</p>
                 </div>
             </div>
-        <!-- </div> -->
-        
     </div>
 </template>
