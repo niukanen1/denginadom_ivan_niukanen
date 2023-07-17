@@ -11,9 +11,8 @@ const clearFilters=() => {
 
 <template>
     <div class="flex mx-auto flex-col items-center w-fit mb-8">
-        <div class="flex flex-row px-5 items-center">
+        <div class="flex flex-row flex-wrap px-5 items-center">
             <div class="flex flex-col gap-1">
-                <!-- <label for="name">Character name</label> -->
                 <input type="search" name="name" v-model="store.filter.name" class="border rounded-md px-3"
                     placeholder="Enter character name" />
             </div>

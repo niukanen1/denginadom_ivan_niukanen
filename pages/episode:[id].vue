@@ -35,7 +35,7 @@ onMounted(async () => {
                 </div>
                 <div>
                     <p>Characters in that episode: </p>
-                    <div class="flex flex-row gap-1 max-w-lg overflow-scroll">
+                    <div class="flex flex-row gap-1 max-lg:max-w-lg max-md:max-w-md max-sm:max-w-sm overflow-scroll">
                         <div v-for="characterUrl in currentEpisode.characters">
                             <MiniCharacterCard :url="characterUrl" />
                         </div>
